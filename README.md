@@ -7,7 +7,7 @@ Inventory Management project
 # Images in static folder.
 # HTML and CSS file in templates.
 
-All other Libraries that we required to install, we add them in requuirment file
+All other Libraries that we required to install, we add them in requirement file
 
 
 

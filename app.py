@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET','POST'])
 def Run():
-    return render_template("location.html")
+    return render_template("dashboard.html")
 
 @app.route('/ListToBringDown', methods=['GET','POST'])
 def ListToBringDown():

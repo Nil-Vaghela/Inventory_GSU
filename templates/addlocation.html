@@ -7,24 +7,29 @@
     <link rel="stylesheet" href="addlocation.css" .css">
     <title>Add Location</title>
 </head>
+<style>
+    .red-button {
+        background-color: #E51636;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+</style>
 
 <body>
-    <h1 class="heading">Add Location</h1>
-    <form id="locationForm">
-        <label for="locationName">Location Name:</label><br>
-        <input type="text" id="locationName" name="locationName"><br><br>
+    <button class="red-button" onclick="openform()">Add Location</button>
+    <div class="form-popup" id="myForm">
 
-        <label for="locationImage">Location Image:</label><br>
-        <input type="file" id="locationImage" name="locationImage"><br><br>
-
-        <button type="submit">Submit</button>
-
-    </form>
-
-    <div class="copyright">
-        <p>© Rahul BC</p>
     </div>
-
+    </form>
+    </div>
 </body>
 
 </html>
