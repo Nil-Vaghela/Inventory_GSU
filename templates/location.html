@@ -6,6 +6,125 @@
     <link rel="stylesheet" href="static/css/location.css">
     <title>Inventory Management</title>
 </head>
+<style>
+    body {
+    background-color: whitesmoke;
+    margin: 0; /* Ensure there's no default margin */
+    padding-top: 140px; /* Adjust based on the actual height of your header */
+}
+
+.container {
+    left: 0%;
+    display: inline-block;
+    background-color: #fff;
+    box-shadow: 10px 10px 20px rgba(239, 15, 15, 0.19), 3px 3px 3px rgba(232, 5, 5, 0.423);
+    border-radius: 10px;
+    overflow: hidden;
+    width: 110px;
+    height: 110px;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.container2 {
+    
+    position: fixed;
+    top: 0%;
+    left: 0;
+    right: 0;
+    z-index: 1000; 
+    text-align: center;
+    justify-content: center;
+    background-color: #fff;
+    box-shadow: 10px 10px 20px rgba(239, 15, 15, 0.19),3px 3px 3px rgba(232, 5, 5, 0.423);
+    border-radius: 10px;
+    overflow: hidden;
+    width: 97%;
+    margin: 20px;
+}
+
+.wrapper {
+    display: flex;
+    text-align: center;
+    padding: 0 10px; 
+}
+
+.LocationText, .StockText {
+    color: #040404;
+    font-family: Arial, sans-serif;
+}
+
+.add-new {
+    left: 0%;
+    display: inline-block;
+    box-shadow: 10px 10px 20px rgba(239, 15, 15, 0.19), 3px 3px 3px rgba(232, 5, 5, 0.423);
+    border-radius: 10px;
+    overflow: hidden;
+    width: 110px;
+    height: 110px;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+.LocationLink {
+    display: inline-block; /* Make the link inline-block to allow width and height */
+    width: 100%; /* Full width to cover the container */
+    height: 100%; /* Full height to cover the container */
+    color: #040404; /* Text color, can match .LocationText */
+    text-decoration: none; /* Remove underline from links */
+}
+.btn {
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #d60000;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #bb0000;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+}
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #cccccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px; /* More rounded corners */
+    z-index: 9999;
+    box-shadow: 10px 10px 20px rgba(239, 15, 15, 0.19),3px 3px 3px rgba(232, 5, 5, 0.423);
+}
+.btn{
+    text-align: center;
+}
+.submit{
+    text-align: center;
+}
+#nameInput,#roomInput{
+    width: 100%;
+}
+</style>
 <body>
     <div class="wrapper">
         <div class="container2">
@@ -20,7 +139,7 @@
         </div>
         <!-- Placeholder for adding a new Excel file -->
         <div class="add-new">
-            <a href="{{ url_for('ListToBringDown') }}" class="LocationLink">
+            <button  class="LocationLink" onclick="togglePopup()">
                 <p class="LocationText">Add Location</p>
             </a>
             
@@ -34,6 +153,44 @@
             <p class="LocationText">Add Location</p>
         </div> -->
     </div>
+    <!-- Pop-up content -->
+    <div id="popup" class="popup">
+        <label for="nameInput">Location Name</label><br>
+        <input type="text" id="nameInput" placeholder="Your Name"><br><br><br>
+        <label for="roomInput">Number of StockRooms</label><br>
+        <input type="text" id="roomInput" placeholder="Number of StockRoom"><br><br><br>
+        <div class="submit">
+        <button onclick="submitForm()" class="btn">Submit</button><br>
+        </div>
+    </div>
+
+<!-- Overlay to darken the background when pop-up is shown -->
+    <div id="overlay" class="overlay"></div>
+<script>
+    // Function to toggle pop-up visibility
+    function togglePopup() {
+        var popup = document.getElementById("popup");
+        var overlay = document.getElementById("overlay");
+        
+        if (popup.style.display === "none") {
+            popup.style.display = "block";
+            overlay.style.display = "block";
+        } else {
+            popup.style.display = "none";
+            overlay.style.display = "none";
+        }
+    }
+
+    // Function to submit form
+    function submitForm() {
+        var nameInput = document.getElementById("nameInput").value;
+        // Do something with the input value, for example, display it
+        alert("Hello, " + nameInput + "!");
+        // Close the pop-up
+        togglePopup();
+    }
+</script>
+
 </body>
 </html>
 
