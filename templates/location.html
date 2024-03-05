@@ -4,34 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/css/location.css">
-    <title>Inventory Managment</title>
+    <title>Inventory Management</title>
 </head>
 <body>
-    <div class="main-element">
-        <h1 class="heading"> Select Location </h1>
-    </div>
-    <div class="options">
-        <div class="box">
-            <a href="homepage.html"><img class="cfa" src="../images/chick-fil-a.jpg" alt="Chick-fil-A"> </a>
-            <br/>
-            <br/>
-            <br/>
+    <div class="wrapper">
+        <div class="container2">
+            <p class="StockText">Welcome to PantherStocks </p>
         </div>
-        <div class="box">
-            <a href="homepage.html"><img class="cfa" src="../images/ghost kitchen.png" alt=""></a>
-            <br/>
-            <br/>
-            <br/>
+
+        <div class="container" id="location1">
+            <p class="LocationText">ChickFilA Excel Data</p>
         </div>
-        <div class="box">
-            <a href="addlocation.html"><img class="cfa" src="../images/plus.jpeg" alt=""></a>
-            <br/>
-            <br/>
-            <br/>
+        <div class="container" id="location2">
+            <p class="LocationText">Another Location Excel Data</p>
         </div>
-    </div>
-    <div class="copyright">
-        <p>© Rahul Kanwar</p>
+        <!-- Placeholder for adding a new Excel file -->
+        <div class="add-new">
+            <a href="{{ url_for('ListToBringDown') }}" class="LocationLink">
+                <p class="LocationText">Add Location</p>
+            </a>
+            
+        </div>
+        <!-- {% for file in excel_files %}
+        <div class="container" id="{{ loop.index }}">
+            <p class="LocationText">{{ file }} Excel Data</p>
+        </div>
+        {% endfor %}
+        <div class="container" id="addNew">
+            <p class="LocationText">Add Location</p>
+        </div> -->
     </div>
 </body>
 </html>
+
+
+
+
+

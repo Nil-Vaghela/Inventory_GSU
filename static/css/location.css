@@ -1,39 +1,69 @@
-* {
-    box-sizing: border-box;
-  }
-.heading{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #E51636;
-    color: beige;
-    text-align: center;
-}
-body{
+body {
     background-color: whitesmoke;
+    margin: 0; /* Ensure there's no default margin */
+    padding-top: 140px; /* Adjust based on the actual height of your header */
 }
-.box{
-    float: left;
-    width: 33.33%;
-    padding: 90px;
-}
-.copyright{
-    background-color: #E51636;
-    text-align: center;
-    position: fixed;
-    bottom: 0%;
-    left: 0%;
-    right: 0%;
-}
-.cfa{
-    height: 200px;
-    width: 200px;
-    
-}
-.options::after{
 
-    content: "";
-    clear: both;
-    display: table;
-    align-items: center;
-    ma
+.container {
+    left: 0%;
+    display: inline-block;
+    background-color: #fff;
+    box-shadow: 10px 10px 20px rgba(239, 15, 15, 0.19), 3px 3px 3px rgba(232, 5, 5, 0.423);
+    border-radius: 10px;
+    overflow: hidden;
+    width: 110px;
+    height: 110px;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.container2 {
     
+    position: fixed;
+    top: 0%;
+    left: 0;
+    right: 0;
+    z-index: 1000; 
+    text-align: center;
+    justify-content: center;
+    background-color: #fff;
+    box-shadow: 10px 10px 20px rgba(239, 15, 15, 0.19),3px 3px 3px rgba(232, 5, 5, 0.423);
+    border-radius: 10px;
+    overflow: hidden;
+    width: 97%;
+    margin: 20px;
+}
+
+.wrapper {
+    display: flex;
+    text-align: center;
+    padding: 0 10px; 
+}
+
+.LocationText, .StockText {
+    color: #040404;
+    font-family: Arial, sans-serif;
+}
+
+.add-new {
+    left: 0%;
+    display: inline-block;
+    box-shadow: 10px 10px 20px rgba(239, 15, 15, 0.19), 3px 3px 3px rgba(232, 5, 5, 0.423);
+    border-radius: 10px;
+    overflow: hidden;
+    width: 110px;
+    height: 110px;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+.LocationLink {
+    display: inline-block; /* Make the link inline-block to allow width and height */
+    width: 100%; /* Full width to cover the container */
+    height: 100%; /* Full height to cover the container */
+    color: #040404; /* Text color, can match .LocationText */
+    text-decoration: none; /* Remove underline from links */
 }
