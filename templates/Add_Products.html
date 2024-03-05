@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PantherStocks - Add Product</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: whitesmoke;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .back-to-products {
+            background-color: whitesmoke;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .back-to-products a {
+            text-decoration: none;
+            color: red;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-to-products svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .back-to-products a:hover {
+            text-decoration: underline;
+            color: darkred;
+
+        }
+
+
+        a {
+            text-decoration: none;
+            color: #000;
+            /* Default color, change as needed */
+        }
+
+        a:hover {
+            color: #555;
+            /* Darken color on hover */
+        }
+
+        .navbar {
+            background-color: #d60000;
+            /* Bright red */
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        .navbar a#brand {
+            float: left;
+            font-weight: bold;
+            font-size: 24px;
+            color: whitesmoke;
+            text-align: center;
+            padding: 10px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a#homeLink {
+            float: right;
+            padding: 14px 16px;
+            color: white;
+            text-decoration: none;
+        }
+
+
+        .navbar:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        #store-icon {
+            color: white;
+        }
+
+        .container {
+            background: #fff;
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            background-color: #d60000;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #bb0000;
+        }
+    </style>
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<body>
+
+    <div class="navbar">
+        <a href="#home" id="brand">PantherStocks <i class="fa-solid fa-store" id="store-icon"></i></a>
+        <a href="#home" id="homeLink" style="float: right;">Home <i class="fa-solid fa-house"></i></a>
+    </div>
+    <div class="back-to-products">
+        <a href="#" onclick="history.back();return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                    d="M7.707 14.707a1 1 0 01-1.414-1.414L9.586 10 6.293 6.707A1 1 0 117.707 5.293l4 4a1 1 0 010 1.414l-4 4z"
+                    clip-rule="evenodd" />
+            </svg>
+            Back to products
+        </a>
+    </div>
+    <div class="container">
+        <h2>Add Product</h2>
+        <div class="form-group">
+            <label for="productName">Name</label>
+            <input type="text" id="productName" name="productName" placeholder="Enter product name">
+        </div>
+        <div class="form-group">
+            <label for="productQuantity">Quantity</label>
+            <input type="text" id="productQuantity" name="productQuantity" placeholder="Enter quantity">
+        </div>
+        <div class="form-group">
+            <label for="stockRoom">Stock Room</label>
+            <select id="stockRoom" name="stockRoom">
+                <option value="stockRoom1">Big StockRoom</option>
+                <option value="stockRoom2">Small StockRoom</option>
+            </select>
+        </div>
+        <button type="submit" class="btn">Add product</button>
+    </div>
+
+</body>
+
+</html>

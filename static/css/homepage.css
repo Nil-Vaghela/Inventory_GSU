@@ -1,0 +1,42 @@
+body{
+    background-color: whitesmoke;
+}
+.heading{
+    color: beige;
+    text-align: center;
+    font-size: 45px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    background-color: #E51636;
+}
+
+
+.main-element{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: larger;
+}
+.image{
+    text-align: center;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    bottom: 12%;
+
+}
+.copyright{
+    background-color: #E51636;
+    text-align: center;
+    position: fixed;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+}
+.btn{
+    margin-top: 40px;
+    font-size: larger;
+    font-family: Arial, Helvetica, sans-serif;
+}
