@@ -1,16 +1,17 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 
 app = Flask(__name__)
 
+@app.route('/')
+def index():
+    return render_template('ListToBringDown.html')
 
-@app.route('/', methods=['GET','POST'])
-def Run():
-    return render_template("dashboard.html")
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
 
-@app.route('/ListToBringDown', methods=['GET','POST'])
-def ListToBringDown():
-    return render_template("ListToBringDown.html")
-
-
+@app.route('/add_product')
+def add_product():
+    return render_template('Add_Products.html')
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=8000,debug=True)
+    app.run(debug=True)
