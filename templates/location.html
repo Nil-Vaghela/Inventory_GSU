@@ -3,198 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/css/location.css">
     <title>Inventory Management</title>
+    <style>
+        body {
+            background-color: whitesmoke;
+            margin: 0;
+            padding-top: 140px;
+        }
+
+        .container, .add-new {
+            display: inline-block;
+            background-color: #fff;
+            box-shadow: 10px 10px 20px rgba(239, 15, 15, 0.19), 3px 3px 3px rgba(232, 5, 5, 0.423);
+            border-radius: 10px;
+            overflow: hidden;
+            width: 110px;
+            height: 110px;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container2 {
+            position: fixed;
+            top: 0%;
+            left: 0;
+            right: 0;
+            z-index: 1000; 
+            text-align: center;
+            background-color: #fff;
+            box-shadow: 10px 10px 20px rgba(239, 15, 15, 0.19), 3px 3px 3px rgba(232, 5, 5, 0.423);
+            border-radius: 10px;
+            overflow: hidden;
+            width: 97%;
+            margin: 10px auto;
+        }
+
+        .wrapper {
+            text-align: center;
+            padding: 0;
+        }
+
+        .LocationText, .StockText {
+            color: #040404;
+            font-family: Arial, sans-serif;
+        }
+
+        .add-new {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .LocationLink {
+            display: block; 
+            width: 100%;
+            height: 100%;
+            color: #040404; 
+            text-decoration: none; 
+            line-height: 70px; 
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #d60000;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: Arial, sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background-color: #bb0000;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 30%; 
+            max-width: 400px; 
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            z-index: 9999;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 
+                        0 0 20px rgba(239, 15, 15, 0.25), 
+                        0 0 30px rgba(239, 15, 15, 0.25);
+            text-align: center;
+        }
+
+        .popup label {
+            text-align: left;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1rem;
+            color: #040404;
+            font-family: Arial, sans-serif;
+        }
+
+        .popup input[type="text"] {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: calc(100% - 24px);
+            margin-bottom: 20px; 
+        }
+
+        .submit {
+            text-align: center;
+        }
+
+        .submit .btn {
+            width: 100px;
+            margin: 0 10px;
+        }
+
+        #nameInput, #roomInput {
+            width: calc(100% - 24px);
+        }
+    </style>
 </head>
-<style>
-    body {
-    background-color: whitesmoke;
-    margin: 0; /* Ensure there's no default margin */
-    padding-top: 140px; /* Adjust based on the actual height of your header */
-}
-
-.container {
-    left: 0%;
-    display: inline-block;
-    background-color: #fff;
-    box-shadow: 10px 10px 20px rgba(239, 15, 15, 0.19), 3px 3px 3px rgba(232, 5, 5, 0.423);
-    border-radius: 10px;
-    overflow: hidden;
-    width: 110px;
-    height: 110px;
-    margin: 20px;
-    padding: 20px;
-    text-align: center;
-}
-
-.container2 {
-    
-    position: fixed;
-    top: 0%;
-    left: 0;
-    right: 0;
-    z-index: 1000; 
-    text-align: center;
-    justify-content: center;
-    background-color: #fff;
-    box-shadow: 10px 10px 20px rgba(239, 15, 15, 0.19),3px 3px 3px rgba(232, 5, 5, 0.423);
-    border-radius: 10px;
-    overflow: hidden;
-    width: 97%;
-    margin: 20px;
-}
-
-.wrapper {
-    display: flex;
-    text-align: center;
-    padding: 0 10px; 
-}
-
-.LocationText, .StockText {
-    color: #040404;
-    font-family: Arial, sans-serif;
-}
-
-.add-new {
-    left: 0%;
-    display: inline-block;
-    box-shadow: 10px 10px 20px rgba(239, 15, 15, 0.19), 3px 3px 3px rgba(232, 5, 5, 0.423);
-    border-radius: 10px;
-    overflow: hidden;
-    width: 110px;
-    height: 110px;
-    margin: 20px;
-    padding: 20px;
-    text-align: center;
-    background-color: #ffffff;
-    cursor: pointer;
-}
-.LocationLink {
-    display: inline-block; /* Make the link inline-block to allow width and height */
-    width: 100%; /* Full width to cover the container */
-    height: 100%; /* Full height to cover the container */
-    color: #040404; /* Text color, can match .LocationText */
-    text-decoration: none; /* Remove underline from links */
-}
-.btn {
-    padding: 0.75rem;
-    border: none;
-    border-radius: 5px;
-    background-color: #d60000;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn:hover {
-    background-color: #bb0000;
-}
-
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9998;
-}
-.popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 400px;
-    transform: translate(-50%, -50%);
-    background-color: #ffffff;
-    padding: 20px;
-    border: 1px solid #cccccc;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    border-radius: 10px; /* More rounded corners */
-    z-index: 9999;
-    box-shadow: 10px 10px 20px rgba(239, 15, 15, 0.19),3px 3px 3px rgba(232, 5, 5, 0.423);
-}
-.btn{
-    text-align: center;
-}
-.submit{
-    text-align: center;
-}
-#nameInput,#roomInput{
-    width: 100%;
-}
-</style>
 <body>
     <div class="wrapper">
         <div class="container2">
-            <p class="StockText">Welcome to PantherStocks </p>
+            <p class="StockText">Welcome to PantherStocks</p>
         </div>
 
-        <div class="container" id="location1">
-            <p class="LocationText">ChickFilA Excel Data</p>
-        </div>
-        <div class="container" id="location2">
-            <p class="LocationText">Another Location Excel Data</p>
-        </div>
-        <!-- Placeholder for adding a new Excel file -->
-        <div class="add-new">
-            <button  class="LocationLink" onclick="togglePopup()">
-                <p class="LocationText">Add Location</p>
+        <div class="container">
+            <a class="LocationLink">
+                <p class="LocationText">ChickFilA</p>
             </a>
-            
         </div>
-        <!-- {% for file in excel_files %}
-        <div class="container" id="{{ loop.index }}">
-            <p class="LocationText">{{ file }} Excel Data</p>
+
+        <div class="container" >
+            <a class="LocationLink">
+                <p class="LocationText">Another Location</p>
+            </a>
         </div>
-        {% endfor %}
-        <div class="container" id="addNew">
-            <p class="LocationText">Add Location</p>
-        </div> -->
+
+        <div class="add-new" onclick="togglePopup()">
+            <span class="LocationText">Add Location</span>
+        </div>
     </div>
-    <!-- Pop-up content -->
+
+    <div id="overlay" class="overlay" onclick="togglePopup()"></div>
+
     <div id="popup" class="popup">
-        <label for="nameInput">Location Name</label><br>
-        <input type="text" id="nameInput" placeholder="Your Name"><br><br><br>
-        <label for="roomInput">Number of StockRooms</label><br>
-        <input type="text" id="roomInput" placeholder="Number of StockRoom"><br><br><br>
-        <div class="submit">
-        <button onclick="submitForm()" class="btn">Submit</button><br>
-        </div>
+        <form id="popupForm" onsubmit="submitForm(); return false;">
+            <label for="nameInput">Location Name</label>
+            <input type="text" id="nameInput" placeholder="Enter Location Name">
+
+            <label for="roomInput">Number of StockRooms</label>
+            <input type="text" id="roomInput" placeholder="Enter Number of StockRooms">
+            
+            <div class="submit">
+                <button type="submit" class="btn">Submit</button>
+                <button type="button" onclick="togglePopup()" class="btn">Close</button>
+            </div>
+        </form>
     </div>
 
-<!-- Overlay to darken the background when pop-up is shown -->
-    <div id="overlay" class="overlay"></div>
-<script>
-    // Function to toggle pop-up visibility
-    function togglePopup() {
-        var popup = document.getElementById("popup");
-        var overlay = document.getElementById("overlay");
-        
-        if (popup.style.display === "none") {
-            popup.style.display = "block";
-            overlay.style.display = "block";
-        } else {
-            popup.style.display = "none";
-            overlay.style.display = "none";
+    <script>
+        function togglePopup() {
+            var popup = document.getElementById('popup');
+            var overlay = document.getElementById('overlay');
+            var isHidden = popup.style.display === 'none';
+
+            popup.style.display = isHidden ? 'flex' : 'none';
+            overlay.style.display = isHidden ? 'block' : 'none';
         }
-    }
 
-    // Function to submit form
-    function submitForm() {
-        var nameInput = document.getElementById("nameInput").value;
-        // Do something with the input value, for example, display it
-        alert("Hello, " + nameInput + "!");
-        // Close the pop-up
-        togglePopup();
-    }
-</script>
+        function submitForm() {
+            // Implement your form submission logic here
+            var name = document.getElementById('nameInput').value;
+            var rooms = document.getElementById('roomInput').value;
+            console.log('Submitting:', name, rooms);
+            togglePopup();
+        }
 
+        // Prevent the form from refreshing the page on submit
+        document.getElementById('popupForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            submitForm();
+        });
+    </script>
 </body>
 </html>
-
-
-
-
-
