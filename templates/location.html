@@ -25,11 +25,13 @@
         }
 
         .container2 {
+
             position: fixed;
             top: 0%;
             left: 0;
             right: 0;
             z-index: 1000; 
+            max-height: 80%;
             text-align: center;
             background-color: #fff;
             box-shadow: 10px 10px 20px rgba(239, 15, 15, 0.19), 3px 3px 3px rgba(232, 5, 5, 0.423);
@@ -43,15 +45,30 @@
             text-align: center;
             padding: 0;
         }
+        .StockText {
+            color: #d60000;
+    font-family: Arial, sans-serif;
+    line-height: 1.2;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+        }
 
-        .LocationText, .StockText {
+        .LocationText {
             color: #040404;
-            font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif;
+    line-height: 1.2;
+    overflow: hidden; 
+    text-overflow: ellipsis;
         }
 
         .add-new {
             cursor: pointer;
             position: relative;
+            color: #040404;
+    font-family: Arial, sans-serif;
+    line-height: 1.2;
+    overflow: hidden; 
+    text-overflow: ellipsis;
         }
 
         .LocationLink {
@@ -97,6 +114,7 @@
             left: 50%;
             width: 30%; 
             max-width: 400px; 
+            max-height: 80%;
             transform: translate(-50%, -50%);
             background-color: #ffffff;
             padding: 25px;
@@ -156,6 +174,11 @@
                 <p class="LocationText">Another Location</p>
             </a>
         </div>
+        <div class="container" >
+            <a class="LocationLink">
+                <p class="LocationText">Another Location</p>
+            </a>
+        </div>
 
         <div class="add-new" onclick="togglePopup()">
             <span class="LocationText">Add Location</span>
@@ -169,8 +192,8 @@
             <label for="nameInput">Location Name</label>
             <input type="text" id="nameInput" placeholder="Enter Location Name">
 
-            <label for="roomInput">Number of StockRooms</label>
-            <input type="text" id="roomInput" placeholder="Enter Number of StockRooms">
+            <label for="roomInput">Name for stockrooms</label>
+            <div id="stockroomInputsContainer"></div>
             
             <div class="submit">
                 <button type="submit" class="btn">Submit</button>
@@ -180,28 +203,57 @@
     </div>
 
     <script>
-        function togglePopup() {
-            var popup = document.getElementById('popup');
-            var overlay = document.getElementById('overlay');
-            var isHidden = popup.style.display === 'none';
+        document.addEventListener('DOMContentLoaded', (event) => {
+    // Initial setup
+    document.getElementById('popup').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+    addStockroomInput(); // Call this function initially to add the first stockroom input
+});
 
-            popup.style.display = isHidden ? 'flex' : 'none';
-            overlay.style.display = isHidden ? 'block' : 'none';
-        }
+function addStockroomInput() {
+    var container = document.getElementById('stockroomInputsContainer');
+    var currentStockroomNumber = container.childElementCount + 1;
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.id = `roomInput${currentStockroomNumber}`;
+    input.placeholder = `Stockroom ${currentStockroomNumber} Name`;
+    input.oninput = function() { handleStockroomInput(this); };
+    container.appendChild(input);
+}
 
-        function submitForm() {
-            // Implement your form submission logic here
-            var name = document.getElementById('nameInput').value;
-            var rooms = document.getElementById('roomInput').value;
-            console.log('Submitting:', name, rooms);
-            togglePopup();
-        }
+function handleStockroomInput(input) {
+    // Check if the input is the last child in the container
+    var container = document.getElementById('stockroomInputsContainer');
+    if (input === container.lastElementChild) {
+        addStockroomInput(); // Add another stockroom input field
+    }
+}
 
-        // Prevent the form from refreshing the page on submit
-        document.getElementById('popupForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            submitForm();
-        });
+// Update existing functions as necessary
+function togglePopup() {
+    var popup = document.getElementById('popup');
+    var overlay = document.getElementById('overlay');
+    var isHidden = popup.style.display === 'none';
+    
+    popup.style.display = isHidden ? 'flex' : 'none';
+    overlay.style.display = isHidden ? 'block' : 'none';
+    if (isHidden) {
+        document.getElementById('stockroomInputsContainer').innerHTML = ''; // Clear previous inputs
+        addStockroomInput(); // Add the first input again when popup opens
+    }
+}
+
+function submitForm() {
+    var name = document.getElementById('nameInput').value;
+    var container = document.getElementById('stockroomInputsContainer');
+    var stockrooms = [];
+    for (var i = 0; i < container.childElementCount; i++) {
+        stockrooms.push(container.children[i].value);
+    }
+    console.log('Submitting:', name, stockrooms);
+    togglePopup();
+}
+
     </script>
 </body>
 </html>
