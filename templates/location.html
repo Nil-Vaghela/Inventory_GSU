@@ -163,24 +163,14 @@
         <div class="container2">
             <p class="StockText">Welcome to PantherStocks</p>
         </div>
-
+        {% for i in file %}
         <div class="container">
             <a class="LocationLink">
-                <p class="LocationText">ChickFilA</p>
-                <p class="Total Stock :"
+                <p class="LocationText">{{i}}</p>  
             </a>
         </div>
+        {% endfor %}
 
-        <div class="container" >
-            <a class="LocationLink">
-                <p class="LocationText">Another Location</p>
-            </a>
-        </div>
-        <div class="container" >
-            <a class="LocationLink">
-                <p class="LocationText">Another Location</p>
-            </a>
-        </div>
 
         <div class="add-new" onclick="togglePopup()">
             <span class="LocationText">Add Location</span>

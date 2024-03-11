@@ -8,14 +8,14 @@ app = Flask(__name__)
 @app.route('/', methods=['GET','POST'])
 def Run():
     Show_Location = location.Location.ShowLocation()
-    
-    return render_template("location.html")
+    print(Show_Location)
+    return render_template("location.html",file = Show_Location)
 
 @app.route('/ListToBringDown', methods=['GET','POST'])
 def ListToBringDown():
     Show_Location = location.Location.ShowLocation()
     
-    return render_template("ListToBringDown.html")
+    return render_template("ListToBringDown.html",)
 
 
 if __name__ == '__main__':

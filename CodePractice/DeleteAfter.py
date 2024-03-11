@@ -3,7 +3,7 @@ import os
 
 def make_new_location():
     #This will be Used As File name
-    LocationName = "Chick-Fil-A"
+    LocationName = "Ghost Kitchen"
 
     #These are user input for stockroom names
     NameOfStockRoom = ["BigStockRoom","SmallStockRoom"]
