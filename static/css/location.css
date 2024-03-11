@@ -1,5 +1,5 @@
 body {
-    background-color: whitesmoke;
+    background-color: rgba(239, 15, 15, 0.19);
     margin: 0; /* Ensure there's no default margin */
     padding-top: 140px; /* Adjust based on the actual height of your header */
 }
