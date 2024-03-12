@@ -16,6 +16,7 @@ class Location():
         LocationName = Locationsname
 
         #These are user input for stockroom names
+        
         NameOfStockRoom = Stockrooms
     
     # These are PreDefine Static column Names

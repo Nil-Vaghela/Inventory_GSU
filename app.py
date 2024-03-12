@@ -9,7 +9,7 @@ app = Flask(__name__)
 def Run():
     Show_Location = location.Location.ShowLocation()
     if request.method == "POST":
-        location.Location.addLocation(Locationsname=request.form['nameInput'],Stockrooms=(request.form.getlist("stockroom[]")))
+        location.Location.addLocation(Locationsname=request.form['nameInput'],Stockrooms= list(filter(None,(request.form.getlist("stockroom[]")))))
         return render_template("location.html",file = Show_Location)
     return render_template("location.html",file = Show_Location)
 
