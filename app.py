@@ -9,7 +9,8 @@ app = Flask(__name__)
 def Run():
     Show_Location = location.Location.ShowLocation()
     if request.method == "POST":
-        print(request.form.getlist("stockroom[]"))
+        location.Location.addLocation(Locationsname=request.form['nameInput'],Stockrooms=(request.form.getlist("stockroom[]")))
+        return render_template("location.html",file = Show_Location)
     return render_template("location.html",file = Show_Location)
 
 @app.route('/ListToBringDown', methods=['GET','POST'])
