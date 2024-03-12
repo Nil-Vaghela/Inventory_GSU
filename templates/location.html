@@ -172,80 +172,76 @@
         {% endfor %}
 
 
-        <div class="add-new" onclick="togglePopup()">
-            <span class="LocationText">Add Location</span>
-        </div>
+        <div class="add-new" onclick="togglePopup(true)">Add Location</div>
     </div>
 
-    <div id="overlay" class="overlay" onclick="togglePopup()"></div>
+    <div id="overlay" class="overlay" onclick="togglePopup(false)"></div>
 
     <div id="popup" class="popup">
-        <form id="popupForm" onsubmit="submitForm(); return false;">
+        <form id="popupForm">
             <label for="nameInput">Location Name</label>
-            <input type="text" id="nameInput" placeholder="Enter Location Name">
+            <input type="text" id="nameInput" name="nameInput" placeholder="Enter Location Name">
 
             <label for="roomInput">Name for stockrooms</label>
-            <div id="stockroomInputsContainer"></div>
+            <div id="stockroomInputsContainer">
+                
+            </div>
             
             <div class="submit">
-                <button type="submit" class="btn">Submit</button>
-                <button type="button" onclick="togglePopup()" class="btn">Close</button>
+                <button type="button" onclick="submitForm()" class="btn">Submit</button>
+                <button type="button" onclick="togglePopup(false)" class="btn">Close</button>
             </div>
         </form>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-    // Initial setup
-    document.getElementById('popup').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
-    addStockroomInput(); // Call this function initially to add the first stockroom input
-});
+        function togglePopup(show) {
+            document.getElementById('popup').style.display = show ? 'block' : 'none';
+            document.getElementById('overlay').style.display = show ? 'block' : 'none';
+            if (show) {
+                document.getElementById('stockroomInputsContainer'); // Clear previous inputs
+                 
+            }
+        }
 
-function addStockroomInput() {
-    var container = document.getElementById('stockroomInputsContainer');
-    var currentStockroomNumber = container.childElementCount + 1;
-    var input = document.createElement('input');
-    input.type = 'text';
-    input.id = `roomInput${currentStockroomNumber}`;
-    input.placeholder = `Stockroom ${currentStockroomNumber} Name`;
-    input.oninput = function() { handleStockroomInput(this); };
-    container.appendChild(input);
-}
+        function addStockroomInput() {
+            var container = document.getElementById('stockroomInputsContainer');
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'stockroom[]'; // Ensure name is suitable for an array of values
+            input.placeholder = 'Enter Stockroom Name';
+            input.oninput = function() { handleStockroomInput(input); };
+            container.appendChild(input);
+        }
 
-function handleStockroomInput(input) {
-    // Check if the input is the last child in the container
-    var container = document.getElementById('stockroomInputsContainer');
-    if (input === container.lastElementChild) {
-        addStockroomInput(); // Add another stockroom input field
-    }
-}
+        function handleStockroomInput(input) {
+            var container = document.getElementById('stockroomInputsContainer');
+            if (input === container.lastElementChild && input.value) {
+                addStockroomInput(); // Add another input field if the current one is the last and has been typed in
+            }
+        }
 
-// Update existing functions as necessary
-function togglePopup() {
-    var popup = document.getElementById('popup');
-    var overlay = document.getElementById('overlay');
-    var isHidden = popup.style.display === 'none';
-    
-    popup.style.display = isHidden ? 'flex' : 'none';
-    overlay.style.display = isHidden ? 'block' : 'none';
-    if (isHidden) {
-        document.getElementById('stockroomInputsContainer').innerHTML = ''; // Clear previous inputs
-        addStockroomInput(); // Add the first input again when popup opens
-    }
-}
+        function submitForm() {
+            var form = document.getElementById('popupForm');
+    var formData = new FormData(form);
+    fetch('/', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        if (response.ok) {
+            togglePopup(false); // Close the popup
+            window.location.reload(); // Refresh the page
+        } else {
+            throw new Error('Submission failed');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+        }
 
-function submitForm() {
-    var name = document.getElementById('nameInput').value;
-    var container = document.getElementById('stockroomInputsContainer');
-    var stockrooms = [];
-    for (var i = 0; i < container.childElementCount; i++) {
-        stockrooms.push(container.children[i].value);
-    }
-    console.log('Submitting:', name, stockrooms);
-    togglePopup();
-}
-
+        document.addEventListener('DOMContentLoaded', function() {
+            addStockroomInput(); // Initially add a stockroom input when the document is ready
+        });
     </script>
 </body>
 </html>

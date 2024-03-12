@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from Location import location
 
 
@@ -8,13 +8,14 @@ app = Flask(__name__)
 @app.route('/', methods=['GET','POST'])
 def Run():
     Show_Location = location.Location.ShowLocation()
-    print(Show_Location)
+    if request.method == "POST":
+        print(request.form.getlist("stockroom[]"))
     return render_template("location.html",file = Show_Location)
 
 @app.route('/ListToBringDown', methods=['GET','POST'])
 def ListToBringDown():
     Show_Location = location.Location.ShowLocation()
-    
+
     return render_template("ListToBringDown.html",)
 
 
