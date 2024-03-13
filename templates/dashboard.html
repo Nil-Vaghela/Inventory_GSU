@@ -5,103 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Dashboard</title>
-    <link rel="stylesheet" href="static/css/NavBar.css">
-    <style>
-        body {
-            padding: 0;
-            margin: 0;
-            background-color: #F5F5F5;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .dashboard {
-            color: #333;
-            margin: 10px;
-        }
-
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 60px;
-            padding: 20px;
-            background: #fff;
-        }
-
-        .header-wrapper {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            background: #fff;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            padding: 10px 2rem;
-            align-items: center;
-        }
-
-        .card {
-            box-shadow: 10px 10px 20px rgba(239, 15, 15, 0.19), 3px 3px 3px rgba(232, 5, 5, 0.423);
-            transition: 0.3s;
-            background: #fff;
-            border-radius: 5px;
-            padding: 20px;
-            margin: 20px;
-            display: inline-block;
-            width: calc(25% - 40px);
-        }
-
-        .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-        }
-
-        .container {
-            padding: 2px 16px;
-        }
-
-        .red-button {
-            background-color: #E51636;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .red-button:hover {
-            background-color: #E51636;
-        }
-
-        .sudo-card {
-            text-align: center;
-            padding: 10px;
-            margin-top: 10px;
-            font-size: 18px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/css/Dashboard.css">
+    
 </head>
-<div class="container">
+<div class="navcontainer">
     <div class="navbar">
         <a href="/" class="active">Dashboard</a>
         <a href="/">Add Stock</a>
         <a href="/">Reports</a>
-        <a href="/ListToBringDown.html">Bring Down</a>
+        <a href="ListToBringDown">Bring Down</a>
+        <a href="ListToBringDown">Change Location</a>
     </div>
 </div>
 
-<div class="main-content">
-    <div class="header-wrapper">
+<div class="container">
+    
         <div class="header">
-            <h2>Inventory Summary</h2>
+            <h2> {{LocationName }}'s Inventory Summary</h2>
         </div>
-    </div>
+    
     <div class="dashboard">
         <div class="card">
             <h4><b>Items</b></h4>
@@ -142,7 +64,7 @@
         <div class="sudo-card">
             <p>There is no recent activity. Check back again</p>
         </div>
-        <button class="red-button">Back to Location</button>
+       
     </div>
 
 </div>

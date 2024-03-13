@@ -14,7 +14,7 @@
         .container, .add-new {
             display: inline-block;
             background-color: #fff;
-            box-shadow: 10px 10px 20px rgba(0, 57, 166, 0.19), 3px 3px 3px rgba(0, 57, 166, 0.423);
+            box-shadow: 10px 10px 30px rgba(0, 57, 166, 0.19), 6px 6px 6px rgba(0, 57, 166, 0.423);
             border-radius: 10px;
             overflow: hidden;
             width: 110px;
@@ -34,7 +34,7 @@
             max-height: 80%;
             text-align: center;
             background-color: #fff;
-            box-shadow: 10px 10px 20px rgba(0, 57, 166, 0.19), 3px 3px 3px rgba(0, 57, 166, 0.423);
+            box-shadow: 10px 10px 30px rgba(0, 57, 166, 0.19), 6px 6px 6px rgba(0, 57, 166, 0.423);
             border-radius: 10px;
             overflow: hidden;
             width: 97%;
@@ -82,11 +82,12 @@
         }
 
         .btn {
-            padding: 10px 15px;
+            padding: 10px 15px 20px;
             border: none;
             border-radius: 5px;
-            background-color: #d60000;
-            color: white;
+            box-shadow: 3px 2px 20px rgba(0, 57, 166, 0.19), 3px 3px 3px rgba(0, 57, 166, 0.423);
+            margin: 10px auto;
+            color: rgb(0, 0, 0);
             cursor: pointer;
             transition: background-color 0.3s ease;
             font-family: Arial, sans-serif;
@@ -94,7 +95,7 @@
         }
 
         .btn:hover {
-            box-shadow: 10px 10px 20px rgba(0, 57, 166, 0.19), 3px 3px 3px rgba(0, 57, 166, 0.423);
+            box-shadow: 10px 10px 30px rgba(0, 57, 166, 0.19), 6px 6px 6px rgba(0, 57, 166, 0.423);
         }
 
         .overlay {
@@ -154,7 +155,7 @@
         }
 
         #nameInput, #roomInput {
-            width: calc(100% - 24px);
+            width: calc(100% - 24px); 
         }
     </style>
 </head>
@@ -164,12 +165,11 @@
             <p class="StockText">Welcome to PantherStocks</p>
         </div>
         {% for i in file %}
-        <div class="container">
-            <a class="LocationLink">
-                <p class="LocationText">{{i}}</p>  
-            </a>
-        </div>
-        {% endfor %}
+    <form action="{{ url_for('Dashboard') }}" method="post" class="container" onclick="this.submit();">
+        <input type="hidden" name="LocationName" value="{{ i }}">
+        <p class="LocationText">{{ i }}</p>
+    </form>
+{% endfor %}
 
 
         <div class="add-new" onclick="togglePopup(true)">Add Location</div>

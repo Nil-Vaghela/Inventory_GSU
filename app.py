@@ -13,11 +13,22 @@ def Run():
         return render_template("location.html",file = Show_Location)
     return render_template("location.html",file = Show_Location)
 
+
+@app.route('/Dashboard',methods = ["GET","POST"])
+def Dashboard():
+    if request.method == "POST":
+        location_name = request.form["LocationName"]
+        location_name = location_name[:-5]
+        return render_template("dashboard.html",LocationName = location_name)
+
+
+
+
 @app.route('/ListToBringDown', methods=['GET','POST'])
 def ListToBringDown():
     Show_Location = location.Location.ShowLocation()
 
-    return render_template("ListToBringDown.html",)
+    return render_template("ListToBringDown.html")
 
 
 if __name__ == '__main__':
