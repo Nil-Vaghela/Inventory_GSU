@@ -173,11 +173,13 @@
         <div class="form-group">
             <label for="stockRoom">Stock Room</label>
             <select id="stockRoom" name="stockRoom">
-                <option value="stockRoom1">Big StockRoom</option>
-                <option value="stockRoom2">Small StockRoom</option>
+                {% for names in stock_names %}
+                <option value="{{ names }}">{{ names }}</option>
+                {% endfor %}
             </select>
         </div>
-        <button type="submit" class="btn">Add product</button>
+    </div>
+    <button type="submit" class="btn">Add product</button>
     </div>
 
 </body>
