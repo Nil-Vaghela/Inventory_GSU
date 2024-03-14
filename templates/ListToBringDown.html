@@ -21,20 +21,19 @@
 
     <div class="container2">
         <div class="header">Inventory Management</div>
-
-        <div class="form-group">
-            <label for="itemName">Item Name:</label>
-            <input type="text" id="itemName" name="itemName">
-        </div>
-
-        <div class="form-group">
-            <label for="itemQuantity">Quantity:</label>
-            <input type="number" id="itemQuantity" name="itemQuantity">
-        </div>
-        <div class="ButtonContainer">
-            <button>Submit</button>
-            <button>Home 🏠</button>
-        </div>
+        <form id="itemForm" action="/add-item" method="POST">
+            <div class="form-group">
+                <label for="itemName">Item Name:</label>
+                <input type="text" id="itemName" name="itemName" required>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" required>
+            </div>
+            <div class="ButtonContainer">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
 
         <p class="StockText">StockRoom 1: The Small Stockroom</p>
         <table>

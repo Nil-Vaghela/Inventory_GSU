@@ -68,9 +68,8 @@ body {
         color: #000000;
         padding: 5px;
         text-align: center;
-        border-radius: 10px;
         font-size: 24px;
-        box-shadow: 10px 10px 30px rgba(0, 58, 166, 0.217), 6px 6px 6px rgba(0, 57, 166, 0.217);
+       
         
     }
     .form-group {
