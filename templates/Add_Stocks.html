@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Stocks</title>
+    <link rel="stylesheet" href="/static/css/AddStocks.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="navcontainer">
+        <div class="navbar">
+            <a href="/Dashboard" class="active">Dashboard</a>
+            <a href="/AddStocks">Add Stock</a>
+            <a href="/">Reports</a>
+            <a href="ListToBringDown">Bring Down</a>
+            <a href="/">Change Location</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <form id="popupForm" method="post" action="{{ url_for('AddProducts') }}">
+            <h2>Add Stocks</h2>
+            <div class="form-group">
+                <label for="productName">Name</label>
+                <input type="text" id="productName" name="productName" placeholder="Enter product name">
+            </div>
+            <div class="form-group">
+                <label for="productQuantity">Quantity</label>
+                <input type="text" id="productQuantity" name="productQuantity" placeholder="Enter quantity">
+            </div>
+            <div class="form-group">
+                <label for="stockRoom">Stock Room</label>
+                <select id="stockRoom" name="stockRoom">
+                    {% for names in stock_names %}
+                    <option value="{{ names }}">{{ names }}</option>
+                    {% endfor %} 
+                </select>
+            </div>
+            <button type="submit" class="btn">Add product</button>
+        </form>
+    </div>
+
+  
+
+</body>
+</html>

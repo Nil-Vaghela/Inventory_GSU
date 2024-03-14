@@ -14,7 +14,8 @@ def make_new_location():
 
     #GetPath To Save Excel File
 
-    Full_Path = os.path.join("Inventory_GSU", "Database", "Chick Fil A.xlsx")
+    # Full_Path = os.path.join("Inventory_GSU", "Database", "Chick Fil A.xlsx")
+    Full_Path = os.path.join(os.getcwd(),"Database")
 
     df = pd.DataFrame(columns=CustomColumns)
 
@@ -26,8 +27,9 @@ def make_new_location():
 
 def read_stock_names():
     LocationName = "Chick Fil A"
-    Full_Path = os.path.join("Inventory_GSU", "Database", "Chick Fil A.xlsx")
-    df = pd.read_excel(Full_Path)
+    Full_Path = os.path.join(os.getcwd(),"Database")
+    FilePath = os.path.join(Full_Path,f"{LocationName}.xlsx")
+    df = pd.read_excel(FilePath)
     stock_names=df.columns.to_list()
     print(stock_names)
 
