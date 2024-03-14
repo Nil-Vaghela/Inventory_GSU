@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for, request
 from Location import location
 from Addstocks import Add_Stocks
 from Database import Temp
-from Addstocks.Add_Stocks import check_stock,total_items
+from Dashboard import HomePage
 
 
 app = Flask(__name__)
@@ -13,15 +13,7 @@ app = Flask(__name__)
 LocationNames = Temp.SessionData.Session("")
 
 
-def update_stock_info():
-    global LocationNames
-    if LocationNames:
-        filepath = LocationNames  # Construct file path dynamically based on location
-        low_stock_threshold = 10  # Define your threshold for low stock
-        out_of_stock, low_stock = check_stock(filepath, low_stock_threshold)
-        return out_of_stock, low_stock
-    else:
-        return [], []
+
 
 @app.route('/', methods=['GET','POST'])
 def Run():
@@ -35,14 +27,15 @@ def Run():
 
 @app.route('/Dashboard',methods = ["GET","POST"])
 def Dashboard():
+    global LocationNames
     if request.method == "POST":
         location_name = request.form["LocationName"]
         location_name = location_name[:-5]
-        global LocationNames
         LocationNames = Temp.SessionData.Session(location_name)
-    out_of_stock, low_stock = update_stock_info()
-    total = total_items(LocationNames)
-    return render_template("dashboard.html", LocationName=LocationNames, out_of_stock=out_of_stock, low_stock=low_stock, total=total)
+
+    out_of_stock, low_stock = HomePage.homepageReports.check_stock(LocationName= LocationNames,low_stock_threshold=3)
+    Total = HomePage.homepageReports.total_items(LocationName=LocationNames)
+    return render_template("dashboard.html", LocationName=LocationNames, out_of_stock=out_of_stock, low_stock=low_stock, total=Total)
     
 
     
