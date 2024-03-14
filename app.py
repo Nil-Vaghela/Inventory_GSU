@@ -33,15 +33,16 @@ def Dashboard():
 @app.route('/AddStocks',methods=["GET","POST"])
 def AddProducts():
     Fetch_Columns = Add_Stocks.AddProudctsPage.Fetchstocks(LocationNames)
+    ProductList = Add_Stocks.AddProudctsPage.Products(LocationNames)
 
     if request.method == "POST":
         StockName = request.form["productName"]
         StockQuantity = request.form["productQuantity"]
         StockRoomName = request.form["stockRoom"]
         Add_Stocks.AddProudctsPage.addStocks(ProductName=StockName,Quantity=StockQuantity,Stockroom=StockRoomName,LocationName=LocationNames)
-        return render_template("Add_Stocks.html",stock_names = Fetch_Columns)
+        return render_template("Add_Stocks.html",stock_names = Fetch_Columns,stockList = ProductList)
         
-    return render_template("Add_Stocks.html",stock_names = Fetch_Columns)
+    return render_template("Add_Stocks.html",stock_names = Fetch_Columns,stockList=ProductList)
 
 
 

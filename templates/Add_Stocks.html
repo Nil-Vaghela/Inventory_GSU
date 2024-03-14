@@ -23,7 +23,12 @@
             <h2>Add Stocks</h2>
             <div class="form-group">
                 <label for="productName">Name</label>
-                <input type="text" id="productName" name="productName" placeholder="Enter product name">
+                <input type="text" id="productName" name="productName" placeholder="Enter product name" list="productList">
+    <datalist id="productList">
+        {% for name in stockList %}
+            <option value="{{ name }}">
+        {% endfor %}
+    </datalist>
             </div>
             <div class="form-group">
                 <label for="productQuantity">Quantity</label>
