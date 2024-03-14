@@ -18,20 +18,17 @@ class AddProudctsPage:
           #Update
 
           column = "ProductName"
-          ProductList=df_existing["ProductName"].to_list()
+          ProductList=df_existing["ProductName"].values
 
           if ProductName in ProductList:
-               newq =df_existing.loc[df_existing["ProductName"]==ProductName,"Quantity"] + Quantity
-               print(newq)
-               new_row = {"ProductName": ProductName, "Quantity": Quantity, Stockroom: "Y"}
-               df_new_row = pd.DataFrame([new_row])  # Create a DataFrame for the new row
-               df_updated = pd.concat([df_existing, df_new_row], ignore_index=True)
-
-               with pd.ExcelWriter(FilePath, engine="openpyxl", mode='w') as writer:
-                    df_updated.to_excel(writer, index=False)
+               product_index = df_existing.index[df_existing['ProductName'] == ProductName].tolist()[0]
                
+               df_existing.at[product_index, 'Quantity'] += int(Quantity)
+               with pd.ExcelWriter(FilePath, engine="openpyxl", mode='w') as writer:
+                    df_existing.to_excel(writer, index=False)
+
           else:
-               new_row = {"ProductName": ProductName, "Quantity": Quantity, Stockroom: "Y"}
+               new_row = {"ProductName": ProductName, "Quantity": int(Quantity), Stockroom: "Y"}
                df_new_row = pd.DataFrame([new_row])  # Create a DataFrame for the new row
                df_updated = pd.concat([df_existing, df_new_row], ignore_index=True)
 
