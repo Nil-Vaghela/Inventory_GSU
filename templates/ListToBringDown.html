@@ -11,16 +11,17 @@
 <body>
     <div class="container">
         <div class="navbar">
-            <a href="{{ url_for('ListToBringDown') }}" class="active">Dashboard</a>
-            <a href="/">Add Products</a>
+            <a href="/Dashboard" class="active">Dashboard</a>
+            <a href="/AddStocks">Add Stock</a>
             <a href="/">Reports</a>
-            <a href="/ListToBringDown.html">Bring Down</a>
+            <a href="ListToBringDown">Bring Down</a>
+            <a href="/">Change Location</a>
         </div>
     </div>
 
 
     <div class="container2">
-        <div class="header">Inventory Management</div>
+         <div class="header">Inventory Management</div>
         <form id="itemForm" action="/add-item" method="POST">
             <div class="form-group">
                 <label for="itemName">Item Name:</label>
@@ -30,22 +31,23 @@
                 <label for="quantity">Quantity:</label>
                 <input type="number" id="quantity" name="quantity" required>
             </div>
-            <div class="ButtonContainer">
+            <div class="Button">
                 <button type="submit">Submit</button>
             </div>
         </form>
+        {% for stockroom,items in stockrooms_data.items()%}
 
-        <p class="StockText">StockRoom 1: The Small Stockroom</p>
+        <p class="StockText">{{stockroom}}</p>
         <table>
             <tr>
                 <th>Item Name</th>
                 <th>Quantity</th>
                 <th>Actions</th>
             </tr>
-
+            {% for item in items%}
             <tr>
-                <td>Penunt Oil</td>
-                <td>10</td>
+                <td>{{ item['ProductName'] }}</td>
+                <td>{{ item['Quantity'] }}</td>
                 <td>
                     ✏️
 
@@ -54,43 +56,11 @@
                 </td>
 
             </tr>
-            <tr>
-                <td>Canola Oil</td>
-                <td>50</td>
-                <td>
-                    ✏️
-                    ✅
-                </td>
-            </tr>
+            {% endfor %}
+            
         </table>
-        <p class="StockText">StockRoom 2: The big stock StockRoom</p>
-        <table>
-            <tr>
-                <th>Item Name</th>
-                <th>Quantity</th>
-                <th>Actions</th>
-            </tr>
-
-            <tr>
-                <td>30 OZ Cups</td>
-                <td>1</td>
-                <td>
-                    ✏️
-                    ✅
-                </td>
-            </tr>
-            <tr>
-                <td>20 OZ Cups</td>
-                <td>50</td>
-                <td>
-                    ✏️
-                    ✅
-                </td>
-            </tr>
-        </table>
+        {% endfor %}
     </div>
-
-    <!-- Testing, GSU -->
 </body>
 
 </html>

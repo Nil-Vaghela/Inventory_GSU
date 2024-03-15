@@ -9,7 +9,8 @@ class Location():
         for i in os.listdir("Database"):
             if i.endswith('.xlsx'):
                 Location_Files.append(i)
-                
+                if i.endswith("_BringDown.xlsx"):
+                    Location_Files.remove(i)
         return Location_Files
     
     def addLocation(Locationsname,Stockrooms):
@@ -30,4 +31,6 @@ class Location():
         df = pd.DataFrame(columns=CustomColumns)
 
         FilePath = os.path.join(Full_Path,f"{LocationName}.xlsx") # Get Final Path
+        ListToBringDownExcelFile = os.path.join(Full_Path,f"{LocationName}_BringDown.xlsx") # Get Final Path
         df.to_excel(FilePath,index=False,index_label="")
+        df.to_excel(ListToBringDownExcelFile,index=False,index_label="")

@@ -3,8 +3,7 @@ from Location import location
 from Addstocks import Add_Stocks
 from Database import Temp
 from Dashboard import HomePage
-
-
+from ListToBringDown import BringDown
 app = Flask(__name__)
 
 
@@ -60,8 +59,18 @@ def AddProducts():
 @app.route('/ListToBringDown', methods=['GET','POST'])
 def ListToBringDown():
     Show_Location = location.Location.ShowLocation()
+    global LocationNames
 
-    return render_template("ListToBringDown.html")
+    List_df = BringDown.ListtobringDown.ReadWorkingFile(LocationNme=LocationNames)
+
+    if request.method == "POST":
+        Product_Name = request.form["itemName"]
+        Quantity = request.form["quantity"]
+
+        NewElist = BringDown.ListtobringDown.MakeNewExcelFile(ProductName=Product_Name,Quantity=int(Quantity),Locationname=LocationNames)
+        return render_template("ListToBringDown.html",stockrooms_data = NewElist)
+
+    return render_template("ListToBringDown.html",stockrooms_data = List_df)
 
 
 
