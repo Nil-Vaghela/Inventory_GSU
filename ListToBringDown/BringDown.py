@@ -2,6 +2,8 @@ import pandas as pd
 import os
 from flask import Flask,render_template
 
+from Addstocks import Add_Stocks
+
 class ListtobringDown:
     def MakeNewExcelFile(ProductName, Quantity,Locationname):
         Full_Path = os.path.join(os.getcwd(), "Database")
@@ -22,7 +24,9 @@ class ListtobringDown:
         List_df = List_df.append(ProductDetails, ignore_index=True)
         List_df.to_excel(List_FilePath,index = False)
 
-        StockRoomData = {col: [] for col in List_df.columns if 'Stockroom' in col}
+        ColumnList = Add_Stocks.AddProudctsPage.Fetchstocks(Locationname)
+        
+        StockRoomData = {col: [] for col in ColumnList }
 
         for _, row in List_df.iterrows():
             for stockroom in StockRoomData.keys():
@@ -38,7 +42,9 @@ class ListtobringDown:
 
         List_FilePath = os.path.join(Full_Path, f"{LocationNme}_BringDown.xlsx")
         List_df = pd.read_excel(List_FilePath)
-        StockRoomData = {col: [] for col in List_df.columns if 'Stockroom' in col}
+        ColumnList = Add_Stocks.AddProudctsPage.Fetchstocks(LocationNme)
+        
+        StockRoomData = {col: [] for col in ColumnList }
         for _, row in List_df.iterrows():
             for stockroom in StockRoomData.keys():
                 if row[stockroom] == 'Y':

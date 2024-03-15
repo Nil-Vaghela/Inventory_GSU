@@ -22,7 +22,7 @@
 
     <div class="container2">
          <div class="header">Inventory Management</div>
-        <form id="itemForm" action="/add-item" method="POST">
+        <form id="itemForm" action="/ListToBringDown" method="POST">
             <div class="form-group">
                 <label for="itemName">Item Name:</label>
                 <input type="text" id="itemName" name="itemName" required>
@@ -35,10 +35,9 @@
                 <button type="submit">Submit</button>
             </div>
         </form>
-        {% for stockroom,items in stockrooms_data.items()%}
-
-        <p class="StockText">{{stockroom}}</p>
-        <table>
+        {% for stockroom, items in stockrooms_data.items() %}
+            <p class="StockText">{{ stockroom }}</p>
+            <table>
             <tr>
                 <th>Item Name</th>
                 <th>Quantity</th>
