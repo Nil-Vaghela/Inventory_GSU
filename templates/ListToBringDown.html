@@ -21,11 +21,15 @@
 
 
     <div class="container2">
-         <div class="header">Inventory Management</div>
+        <div class="header">Inventory Management</div>
         <form id="itemForm" action="/ListToBringDown" method="POST">
             <div class="form-group">
                 <label for="itemName">Item Name:</label>
-                <input type="text" id="itemName" name="itemName" required>
+                <select id="itemName" name="itemName" required>
+                    {% for item_name in item_names %}
+                    <option value="{{ item_name }}">{{ item_name }}</option>
+                    {% endfor %}
+                </select>
             </div>
             <div class="form-group">
                 <label for="quantity">Quantity:</label>
@@ -36,29 +40,34 @@
             </div>
         </form>
         {% for stockroom, items in stockrooms_data.items() %}
-            <p class="StockText">{{ stockroom }}</p>
-            <table>
+    <p class="StockText">{{ stockroom }}</p>
+    <table>
+        <tr>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+        </tr>
+        {% for item in items %}
             <tr>
-                <th>Item Name</th>
-                <th>Quantity</th>
-                <th>Actions</th>
+                <!-- Each item's form needs a unique identifier -->
+                <form action="/ListToBringDown" method="POST">
+                    <td>{{ item['ProductName'] }}</td>
+                    <td>
+                        <!-- For update, let users change the quantity before submitting -->
+                        <input type="number" name="quantity" value="{{ item['Quantity'] }}" required>
+                    </td>
+                    <td>
+                        <input type="hidden" name="productName" value="{{ item['ProductName'] }}">
+                        <!-- Specify the action for each button -->
+                        <button type="submit" name="action" value="update">✏️ Update</button>
+                        <button type="submit" name="action" value="delete">✅ Delete</button>
+                    </td>
+                </form>
             </tr>
-            {% for item in items%}
-            <tr>
-                <td>{{ item['ProductName'] }}</td>
-                <td>{{ item['Quantity'] }}</td>
-                <td>
-                    ✏️
-
-                    ✅
-
-                </td>
-
-            </tr>
-            {% endfor %}
-            
-        </table>
         {% endfor %}
+    </table>
+{% endfor %}
+
     </div>
 </body>
 

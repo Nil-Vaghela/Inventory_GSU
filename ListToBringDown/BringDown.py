@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 from flask import Flask,render_template
-
+from datetime import datetime
 from Addstocks import Add_Stocks
 
 class ListtobringDown:
@@ -51,3 +51,16 @@ class ListtobringDown:
                     # Append the row (as a dict) to the list of items for this stockroom
                     StockRoomData[stockroom].append(row.to_dict())
         return StockRoomData
+    
+    def ItemLists(LocationName):
+        Full_Path = os.path.join(os.getcwd(), "Database")
+        FilePath = os.path.join(Full_Path, f"{LocationName}.xlsx")
+        df = pd.read_excel(FilePath)
+        if os.path.exists(FilePath):
+            df = pd.read_excel(FilePath)
+            item_names = df['ProductName'].unique().tolist()
+        else:
+            item_names = []
+        
+        return item_names
+

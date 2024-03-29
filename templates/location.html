@@ -11,8 +11,12 @@
             padding-top: 140px;
         }
 
+        
+
         .container, .add-new {
-            display: inline-block;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
             background-color: #fff;
             box-shadow: 10px 10px 30px rgba(0, 57, 166, 0.19), 6px 6px 6px rgba(0, 57, 166, 0.423);
             border-radius: 10px;
@@ -22,6 +26,13 @@
             margin: 20px;
             padding: 20px;
             text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .container:hover, .add-new:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 57, 166, 0.3);
         }
 
         .container2 {
@@ -45,21 +56,12 @@
             text-align: center;
             padding: 0;
         }
-        .StockText {
+        .StockText, .LocationText {
             color: #0039a6;
-    font-family: Arial, sans-serif;
-    font-weight: 600;
-    line-height: 1.2;
-    overflow: hidden; 
-    text-overflow: ellipsis;
-        }
-
-        .LocationText {
-            color: #040404;
-    font-family: Arial, sans-serif;
-    line-height: 1.2;
-    overflow: hidden; 
-    text-overflow: ellipsis;
+            font-weight: 600;
+            line-height: 1.2;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .add-new {
@@ -87,7 +89,7 @@
             border-radius: 5px;
             box-shadow: 3px 2px 20px rgba(0, 57, 166, 0.19), 3px 3px 3px rgba(0, 57, 166, 0.423);
             margin: 10px auto;
-            color: rgb(224, 192, 192);
+            color: #fff;
             cursor: pointer;
             transition:  0.3s ease;
             background-color : #0039a6 ;

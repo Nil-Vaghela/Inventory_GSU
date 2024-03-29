@@ -3,16 +3,13 @@ from Location import location
 from Addstocks import Add_Stocks
 from Database import Temp
 from Dashboard import HomePage
-from ListToBringDown import BringDown
+from ListToBringDown import BringDown,ExcelManager
 app = Flask(__name__)
 
 
 # to store selected Location
 
 LocationNames = Temp.SessionData.Session("")
-
-
-
 
 @app.route('/', methods=['GET','POST'])
 def Run():
@@ -58,19 +55,34 @@ def AddProducts():
 
 @app.route('/ListToBringDown', methods=['GET','POST'])
 def ListToBringDown():
-    Show_Location = location.Location.ShowLocation()
-    global LocationNames
-
-    List_df = BringDown.ListtobringDown.ReadWorkingFile(LocationNme=LocationNames)
-
+    global LocationNames  # Assuming this global variable holds the current location name
+    itemList =  BringDown.ListtobringDown.ItemLists(LocationNames)
     if request.method == "POST":
-        Product_Name = request.form["itemName"]
-        Quantity = request.form["quantity"]
+        action = request.form.get('action')
+        
+        # Handle adding a new item to the list
+        if not action:
+            Product_Name = request.form.get("itemName")
+            Quantity = request.form.get("quantity", type=int)
+            if Product_Name and Quantity is not None:
+                NewElist = BringDown.ListtobringDown.MakeNewExcelFile(ProductName=Product_Name, Quantity=int(Quantity), Locationname=LocationNames)
+                return render_template("ListToBringDown.html", stockrooms_data=NewElist,item_names=itemList)
+        
+        # Handle update/delete actions for existing items
+        else:
+            product_name = request.form.get('productName')
+            quantity = request.form.get('quantity', type=int)
+            excel_manager = ExcelManager.ExcelManager(LocationNames)
+            
+            if action == 'update':
+                excel_manager.update_quantity(product_name, quantity)
+            elif action == 'delete':
+                excel_manager.delete_item(product_name)
+                excel_manager.log_stock_movement(product_name, quantity,LocationNames)
 
-        NewElist = BringDown.ListtobringDown.MakeNewExcelFile(ProductName=Product_Name,Quantity=int(Quantity),Locationname=LocationNames)
-        return render_template("ListToBringDown.html",stockrooms_data = NewElist)
-
-    return render_template("ListToBringDown.html",stockrooms_data = List_df)
+    # Default GET request handling
+    List_df = BringDown.ListtobringDown.ReadWorkingFile(LocationNme=LocationNames)
+    return render_template("ListToBringDown.html", stockrooms_data=List_df,item_names=itemList)
 
 
 
